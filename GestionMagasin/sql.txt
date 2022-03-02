@@ -1,0 +1,60 @@
+CREATE DATABASE gestion_magasin;
+
+use gestion_magasin;
+
+CREATE TABLE Client(
+    id_client char(5) PRIMARY KEY,
+    NomClient varchar(50),
+    PrenomClient varchar(50),
+    ADrClient varchar(50),
+    NumClient varchar(50),
+    EmailClient varchar(50)
+);
+   
+CREATE TABLE Produit(
+        id_Produit char(5) PRIMARY KEY,
+        Libelle varchar(50),
+        Description varchar(50),
+        Prix_unitaire int(50),
+        quantite_stock int(50));
+       
+CREATE TABLE Commande(
+    Id_Commande char(5)PRIMARY KEY,
+    Date_Commande date,
+    Adress_Commande varchar(50),
+    id_client char(5) REFERENCES Client(id_client)
+);
+   
+CREATE TABLE detail_command(
+    id_commande char(5),
+   FOREIGN KEY(Id_Commande) REFERENCES Commande(Id_Commande),
+    id_Produit char(5),
+    FOREIGN KEY(id_Produit)REFERENCES Produit(id_Produit),
+    qnt_Commande int,
+    PRIMARY KEY(Id_Commande,id_Produit)
+    );
+   
+INSERT INTO Produit
+VALUES('A001' , ' JYM Supplement Science 
+' , 'Pro JYM Proteine Blend 1,8Kg' , '699,00 Dhs' ,'100000' ),
+('A002', 'Dymatize', 'ISO 100 2.3 Kg DYMATIZE
+', '939,00 Dhs ', '728'),
+('A003', 'Nutrex research', 'EAA + Hydration Aminos 390g Nutrex', '299,00 Dhs ', '213'),
+('A004', 'Muscletech', 'Nitro Tech Whey Protein MuscleTech 998g', '399,00 Dhs', '240');
+
+ INSERT INTO Client
+ VALUES('B001', 'Salmi', 'Amine', 'Tanger','+212 643056234', 'salmiamine@gmail.com'),
+ ('B002', 'Lessan eddine', 'Khaoula', 'assilah','+212 685 963 347', 'khaoulakhaoula1234@gmail.com'),
+ ('B003', 'El aribi', 'Mohamed', 'Tanger','+212 645679823', 'mohamedel@gmail.com'),
+ ('B004', 'Boughlala', 'Rajae', 'Tangier','+212 677 822 817', 'rajaeboughlala1234@gmail.com');
+
+ INSERT INTO Commande
+ VALUES('C001', '2021/08/01', 'Tangier,ibiria','P334'),
+       ('C002', '2021/10/11', 'Casablanca,Moulay Rachid','P014'),
+       ('C003', '2022/02/18', 'Fés,Agdal','P180'),
+       ('C004', '2022/01/25', 'Marrakech,Bab Kesba','B008');
+
+ INSERT INTO detail_command     
+ VALUES('C001','A001', 8),
+        ('C002','A002',10),
+       ('C003','A003',18;
